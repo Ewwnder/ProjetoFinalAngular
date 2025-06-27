@@ -2,11 +2,11 @@ export interface Contato{
     id: number,
     name: string,
     number: string,
-    cpf: string;
+    apelido: string;
     email: string,
     endereco: string, 
-    dataDeNascimento: string,
-    genero: string,
+    grupo: string, 
+    informacao: string,
     favorito: boolean,
-    bloqueado: boolean
+    dataAniversario: boolean
 }

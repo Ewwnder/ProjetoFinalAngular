@@ -1,0 +1,16 @@
+{
+  "contacts": [
+    {
+      "name": "adad",
+      "number": "212121",
+      "email": null,
+      "grupo": null,
+      "apelido": null,
+      "endereco": null,
+      "informacao": null,
+      "dataAniversario": null,
+      "favorito": null,
+      "id": 1
+    }
+  ]
+}
