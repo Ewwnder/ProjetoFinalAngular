@@ -8,5 +8,5 @@ export interface Contato{
     grupo: string, 
     informacao: string,
     favorito: boolean,
-    dataAniversario: boolean
+    dataAniversario: string
 }

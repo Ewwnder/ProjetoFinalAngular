@@ -17,6 +17,7 @@ export class CadastroComponent implements OnInit{
   constructor(private formBuilder: FormBuilder, private cadastroContato: CadastroService){
 
     this.formGroupCadastro = formBuilder.group({
+      id: [''],
       name: ['', Validators.required],
       number: ['', Validators.required],
       email: [''],
