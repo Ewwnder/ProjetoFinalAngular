@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Contato } from '../../contato';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { GerenciarService } from '../../services/gerenciar.service';
+import { ContatoService } from '../../services/contato.service';
+
 
 @Component({
   selector: 'app-gerenciar',
@@ -14,13 +15,9 @@ export class GerenciarComponent {
   Contato: Contato[] = [];
   formGroupContato: FormGroup;
   isEditing: boolean = false;
+  filtro: FormGroup;
 
-  filtrarNome: string = '';
-  filtrarGrupo: string = '';
-  apenasFavoritos: boolean = false;
-  ordenarAlfabeto: boolean = false;
-
-  constructor(private gerenciarContato: GerenciarService, private formBuilder: FormBuilder) {
+  constructor(private gerenciarContato: ContatoService, private formBuilder: FormBuilder) {
     this.formGroupContato = this.formBuilder.group({
       id: [''],
       name: [''],
@@ -32,6 +29,13 @@ export class GerenciarComponent {
       informacao: [''],
       dataAniversario: [''],
       favorito: [false]
+    });
+
+    this.filtro = this.formBuilder.group({
+      name: [''],
+      grupo: [''],
+      favoritos: [false],
+      ordenarAlfabeto: [false]
     });
   }
 
@@ -70,30 +74,40 @@ export class GerenciarComponent {
     this.formGroupContato.reset();
   }
 
+  toggleOrdem(): void {
+    const atual = this.filtro.get('ordenarAlfabeto')?.value;
+    this.filtro.get('ordenarAlfabeto')?.setValue(!atual);
+  }
+
 
   get filtrarContato(): Contato[]{
     let filtrados = this.Contato;
 
-    if (this.filtrarNome) {
+    const name = this.filtro.get('name')?.value?.toLowerCase() || '';
+    const grupo = this.filtro.get('grupo')?.value || '';
+    const favoritos = this.filtro.get('favoritos')?.value;
+    const ordenarAlfabeto = this.filtro.get('ordenarAlfabeto')?.value;
+
+    if (name) {
       filtrados = filtrados.filter(c =>
-        c.name.toLowerCase().includes(this.filtrarNome.toLowerCase())
-      );
+      c.name.toLowerCase().includes(name));
     }
 
-    if (this.filtrarGrupo) {
-      filtrados = filtrados.filter(c => c.grupo === this.filtrarGrupo);
+    if (grupo) {
+      filtrados = filtrados.filter(c => c.grupo === grupo);
     }
 
-    if (this.apenasFavoritos) {
+    if (favoritos) {
       filtrados = filtrados.filter(c => c.favorito);
     }
 
-    if (this.ordenarAlfabeto) {
+    if (ordenarAlfabeto) {
       filtrados = [...filtrados].sort((a, b) => a.name.localeCompare(b.name));
     }
 
     return filtrados;
-    }
+
+  }
 }
 
 

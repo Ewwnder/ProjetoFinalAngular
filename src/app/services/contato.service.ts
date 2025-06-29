@@ -6,21 +6,25 @@ import { Contato } from '../contato';
 @Injectable({
   providedIn: 'root'
 })
-export class GerenciarService {
-  
-  private apiUrl = 'http://localhost:3000/contacts';
+export class ContatoService {
+
+  private apiUrl = 'http://localhost:3000/contatos';
 
   constructor(private http:HttpClient) {}
 
-  getAll(): Observable<Contato[]>{
+  getAll(): Observable<Contato[]> {
     return this.http.get<Contato[]>(this.apiUrl);
   }
 
-  update(contato:Contato):Observable<Contato>{
+  save(contato: Contato): Observable<Contato> {
+    return this.http.post<Contato>(this.apiUrl, contato);
+  }
+
+  update(contato: Contato): Observable<Contato> {
     return this.http.put<Contato>(`${this.apiUrl}/${contato.id}`, contato);
   }
 
-  delete(contato:Contato):Observable<void>{
+  delete(contato: Contato): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${contato.id}`);
   }
 }

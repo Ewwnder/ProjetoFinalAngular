@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CadastroService } from '../../services/cadastro.service';
+import { ContatoService } from '../../services/contato.service';
 
 
 @Component({
@@ -13,8 +13,8 @@ export class CadastroComponent implements OnInit{
 
   formGroupCadastro: FormGroup;
   visualizarMais: boolean = false;
-
-  constructor(private formBuilder: FormBuilder, private cadastroContato: CadastroService){
+  
+  constructor(private formBuilder: FormBuilder, private cadastroContato: ContatoService){
 
     this.formGroupCadastro = formBuilder.group({
       id: [''],

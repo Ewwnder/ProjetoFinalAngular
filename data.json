@@ -1,3 +1,52 @@
 {
-  "contacts": []
+  "contatos": [
+    {
+      "id": 1,
+      "name": "Ana",
+      "number": "481981189",
+      "email": "adadadad",
+      "apelido": "",
+      "endereco": "",
+      "grupo": "Família",
+      "informacao": "",
+      "dataAniversario": "",
+      "favorito": true
+    },
+    {
+      "id": 2,
+      "name": "Carlços",
+      "number": "2121221212",
+      "email": "12321312",
+      "apelido": "",
+      "endereco": "",
+      "grupo": "Família",
+      "informacao": "",
+      "dataAniversario": "",
+      "favorito": false
+    },
+    {
+      "id": 4,
+      "name": "dadadasd",
+      "number": "dadad",
+      "email": "",
+      "apelido": "",
+      "endereco": "",
+      "grupo": "Trabalho",
+      "informacao": "",
+      "dataAniversario": "",
+      "favorito": false
+    },
+    {
+      "id": 5,
+      "name": "aaa",
+      "number": "2121212",
+      "email": "",
+      "apelido": "",
+      "endereco": "",
+      "grupo": "Escola/Faculdade",
+      "informacao": "",
+      "dataAniversario": "",
+      "favorito": true
+    }
+  ]
 }
