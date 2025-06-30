@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Contato } from '../../contato';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ContatoService } from '../../services/contato.service';
@@ -10,7 +10,7 @@ import { ContatoService } from '../../services/contato.service';
   templateUrl: './gerenciar.component.html',
   styleUrl: './gerenciar.component.css'
 })
-export class GerenciarComponent {
+export class GerenciarComponent implements OnInit{
 
   Contato: Contato[] = [];
   formGroupContato: FormGroup;
@@ -41,13 +41,21 @@ export class GerenciarComponent {
 
   ngOnInit(): void {
     this.loadContatos();
-  }
+
+    this.filtro.valueChanges.subscribe(() => {
+    this.loadContatos();
+  });
+}
 
   loadContatos() {
-    this.gerenciarContato.getAll().subscribe({
+    const nome = this.filtro.get('name')?.value;
+    const favoritos = this.filtro.get('favoritos')?.value;
+    const ordenarAZ = this.filtro.get('ordenarAlfabeto')?.value;
+
+    this.gerenciarContato.filtrarContatos(nome, favoritos, ordenarAZ).subscribe({
       next: json => this.Contato = json
-    });
-  }
+  });
+}
 
   delete(contato: Contato) {
     this.gerenciarContato.delete(contato).subscribe({
@@ -83,15 +91,9 @@ export class GerenciarComponent {
   get filtrarContato(): Contato[]{
     let filtrados = this.Contato;
 
-    const name = this.filtro.get('name')?.value?.toLowerCase() || '';
     const grupo = this.filtro.get('grupo')?.value || '';
     const favoritos = this.filtro.get('favoritos')?.value;
     const ordenarAlfabeto = this.filtro.get('ordenarAlfabeto')?.value;
-
-    if (name) {
-      filtrados = filtrados.filter(c =>
-      c.name.toLowerCase().includes(name));
-    }
 
     if (grupo) {
       filtrados = filtrados.filter(c => c.grupo === grupo);
