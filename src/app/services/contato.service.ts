@@ -16,28 +16,28 @@ export class ContatoService {
     return this.http.get<Contato[]>(this.apiUrl);
   }
 
-  filtrarContatos(nome?: string, favorito?: boolean, ordenarAZ?: boolean): Observable<Contato[]> {
-  let params = new HttpParams();
+  filtrarContatos(tipo?: string, busca?:string ,favorito?: boolean, ordenarAZ?: boolean): Observable<Contato[]> {
+  let contatoFiltrado = new HttpParams();
 
-  if (nome) {
-    params = params.set('name', nome);
+  if (tipo) {
+    contatoFiltrado = contatoFiltrado.set('name', tipo);
+  }
+
+  if (busca){
+    contatoFiltrado = contatoFiltrado.set('busca', busca);
   }
 
   if (favorito) {
-    params = params.set('favorito', favorito.toString());
+    contatoFiltrado = contatoFiltrado.set('favorito', favorito.toString());
   }
 
   if (ordenarAZ) {
-    params = params.set('ordenarAZ', ordenarAZ.toString());
+    contatoFiltrado = contatoFiltrado.set('ordenarAZ', ordenarAZ.toString());
   }
 
-    return this.http.get<Contato[]>(`${this.apiUrl}/filtro`, { params });
+    return this.http.get<Contato[]>(`${this.apiUrl}`, { params: contatoFiltrado });
   }
-
-  buscaNome(name:string):Observable<Contato[]>{
-    return this.http.get<Contato[]>(`${this.apiUrl}/buscaNome?name=${name}`);
-  }
-
+  
   save(contato: Contato): Observable<Contato> {
     return this.http.post<Contato>(this.apiUrl, contato);
   }

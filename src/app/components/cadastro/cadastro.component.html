@@ -1,73 +1,76 @@
-<div class="container">
-    <div class="row">
-        <div class="col-7 m-auto">
-            <h1 class="text-center">Novo Contato</h1>
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <h1 class="text-center mb-4">Novo Contato</h1>
 
-            <form [formGroup]="formGroupCadastro">
+      <form [formGroup]="formGroupCadastro" class="card p-4 shadow-sm border-0">
 
-                <div class="mb-2">
-                    <label for="inputName">Nome *</label>
-                    <input formControlName="name" type="text" class="form-control" id="inputName" placeholder="Nome do Contato">
-                </div>
-
-                <div class="mb-2">
-                    <label for="inputNumero">Número *</label>
-                    <input formControlName="number" type="text" class="form-control" id="inputNumero" placeholder="Número do Contato">
-                </div>
-
-                <div class="mb-2">
-                    <label for="inputEmail">Email</label>
-                    <input formControlName="email" type="text" class="form-control" id="inputEmail" placeholder="Email do Contato">
-                </div>
-                
-                <div class="mb-3">
-                    <label for="inputGrupo">Grupo</label>
-                    <select formControlName="grupo" id="grupo" class="form-control">
-                        <option value="">Selecione</option>
-                        <option>Família</option>
-                        <option>Trabalho</option>
-                        <option>Escola/Faculdade</option>
-                    </select>
-                </div>
-
-                <div class="mb-3 text-center">
-                    <button class="btn btn-primary" (click)="toggleVisualizarMais()">{{visualizarMais ? 'Ocultar Detalhes' : 'Visualizar Detalhes'}}</button>
-                </div>
-
-                <div *ngIf="visualizarMais">
-                    <div class="mb-2">
-                        <label for="inputApelido">Apelido</label>
-                        <input formControlName="apelido" type="text" class="form-control" id="inputApelido">
-                    </div>
-
-                    <div class="mb-2">
-                        <label for="inputEndereco">Endereço</label>
-                        <input formControlName="endereco" type="text" class="form-control" id="inputEndereco">
-                    </div>
-
-                    <div class="mb-2">
-                        <label for="inputInformacoes">Informações</label>
-                        <input formControlName="informacao" type="text" class="form-control" id="inputInformacoes">
-                    </div>
-
-                    <div class="mb-2">
-                        <label for="inputDataAniversario">Data Aniversário</label>
-                        <input formControlName="dataAniversario" type="date" class="form-control" id="inputDataAniversario">
-                    </div>
-
-                    <div class="form-check mb-2">
-                        <input formControlName="favorito" type="checkbox" id="favorito" class="form-check-input" />
-                        <label for="favorito" class="form-check-label">Favorito</label>
-                    </div>
-
-                </div>
-
-                <div class="mb-3">
-                    <button class="btn btn-success" [disabled]="!formGroupCadastro.get('name')?.valid || !formGroupCadastro.get('number')?.valid" (click)="cadastrar()">Cadastrar Contato</button>
-                </div>
-
-            </form>
+        <div class="mb-3">
+          <label for="inputName" class="form-label">Nome *</label>
+          <input formControlName="name" type="text" class="form-control" id="inputName" placeholder="Nome do Contato">
         </div>
-    </div>
 
+        <div class="mb-3">
+          <label for="inputNumero" class="form-label">Número *</label>
+          <input formControlName="number" type="text" class="form-control" id="inputNumero" placeholder="Número do Contato">
+        </div>
+
+        <div class="mb-3">
+          <label for="inputEmail" class="form-label">Email</label>
+          <input formControlName="email" type="email" class="form-control" id="inputEmail" placeholder="Email do Contato">
+        </div>
+
+        <div class="mb-3">
+          <label for="inputGrupo" class="form-label">Grupo</label>
+          <select formControlName="grupo" id="inputGrupo" class="form-select">
+            <option value="">Selecione</option>
+            <option>Família</option>
+            <option>Trabalho</option>
+            <option>Escola/Faculdade</option>
+          </select>
+        </div>
+
+        <div class="text-center my-3">
+          <button type="button" class="btn btn-outline-secondary" (click)="toggleVisualizarMais()">
+            {{ visualizarMais ? 'Ocultar Detalhes ↑' : 'Visualizar Detalhes ↓' }}
+          </button>
+        </div>
+
+        <div *ngIf="visualizarMais" class="border-top pt-3 mt-3">
+
+          <div class="mb-3">
+            <label for="inputApelido" class="form-label">Apelido</label>
+            <input formControlName="apelido" type="text" class="form-control" id="inputApelido">
+          </div>
+
+          <div class="mb-3">
+            <label for="inputEndereco" class="form-label">Endereço</label>
+            <input formControlName="endereco" type="text" class="form-control" id="inputEndereco">
+          </div>
+
+          <div class="mb-3">
+            <label for="inputInformacoes" class="form-label">Informações</label>
+            <input formControlName="informacao" type="text" class="form-control" id="inputInformacoes">
+          </div>
+
+          <div class="mb-3">
+            <label for="inputDataAniversario" class="form-label">Data de Aniversário</label>
+            <input formControlName="dataAniversario" type="date" class="form-control" id="inputDataAniversario">
+          </div>
+
+          <div class="form-check mb-3">
+            <input formControlName="favorito" type="checkbox" id="favorito" class="form-check-input">
+            <label for="favorito" class="form-check-label">Favorito</label>
+          </div>
+
+        </div>
+
+        <div class="d-grid">
+          <button type="button" class="btn btn-success"[disabled]="!formGroupCadastro.get('name')?.valid || !formGroupCadastro.get('number')?.valid" (click)="cadastrar()">Cadastrar Contato
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
 </div>

@@ -1,16 +1,25 @@
-<div class="container">
+<div class="container py-4">
   <div class="row">
     <div class="col-12 col-lg-10 m-auto">
       <h1 class="text-center mb-4">Contatos</h1>
 
-      <form [formGroup]="filtro" class="card p-3 mb-4">
+      <form [formGroup]="filtro" class="card shadow-sm p-3 mb-4 border border">
         <div class="row g-2 align-items-center">
 
-          <div class="col-md-4">
-            <input formControlName="name" type="text" class="form-control" placeholder="Buscar por nome" />
+          <div class="col-md-6 col-lg-4">
+            <input formControlName="name" type="text" class="form-control" placeholder="Buscar..." />
           </div>
 
-          <div class="col-md-3">
+
+          <div class="col-md-6 col-lg-3">
+            <select formControlName="busca" class="form-select">
+              <option value="name">Nome</option>
+              <option value="number">Telefone</option>
+              <option value="email">Email</option>
+            </select>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
             <select formControlName="grupo" class="form-select">
               <option value="">Todos os Grupos</option>
               <option>Família</option>
@@ -19,24 +28,25 @@
             </select>
           </div>
 
-          <div class="col-md-2">
+          <div class="col-md-6 col-lg-2">
             <div class="form-check">
               <input type="checkbox" id="favoritos" class="form-check-input" formControlName="favoritos" />
-              <label for="favoritos" class="form-check-label">Só Favoritos</label>
+              <label for="favoritos" class="form-check-label small">⭐ Só Favoritos</label>
             </div>
           </div>
 
-          <div class="col-md-3 text-end">
-            <button type="button" class="btn btn-outline-secondary" (click)="toggleOrdem()">
+          <div class="col-12 text-end">
+            <button type="button" class="btn btn-outline-primary mt-2" (click)="toggleOrdem()">
+              <i class="bi bi-sort-alpha-down"></i>
               Ordenar {{ filtro.get('ordenarAlfabeto')?.value ? '(A-Z)' : '(Normal)' }}
             </button>
           </div>
         </div>
       </form>
-
+      
       <div class="table-responsive">
-        <table class="table table-striped align-middle">
-          <thead>
+        <table class="table table-hover table-striped align-middle shadow-sm rounded overflow-hidden">
+          <thead class="table-light">
             <tr>
               <th>Id</th>
               <th>Nome</th>
@@ -48,7 +58,7 @@
           <tbody>
             <ng-container *ngFor="let c of filtrarContato">
               <tr>
-                <td>{{ c.id }}</td>
+                <th>{{ c.id }}</th>
                 <td>
                   {{ c.name }}
                   <span *ngIf="c.favorito" title="Favorito">⭐</span>
@@ -56,25 +66,28 @@
                 <td>{{ c.number }}</td>
                 <td>{{ c.grupo }}</td>
                 <td>
-                  <button class="btn btn-primary btn-sm" (click)="onClickUpdate(c)">Editar</button>
+                  <button class="btn btn-sm btn-outline-primary" (click)="onClickUpdate(c)">
+                    ✏️ Editar
+                  </button>
                 </td>
               </tr>
 
               <tr *ngIf="isEditing && formGroupContato.get('id')?.value === c.id">
                 <td colspan="5">
                   <form [formGroup]="formGroupContato" (ngSubmit)="update()">
-                    <div class="row">
-                      <div class="col-md-4 mb-2">
+                    <div class="row g-3">
+
+                      <div class="col-md-4">
                         <label>Nome</label>
                         <input formControlName="name" type="text" class="form-control" />
                       </div>
 
-                      <div class="col-md-4 mb-2">
+                      <div class="col-md-4">
                         <label>Telefone</label>
                         <input formControlName="number" type="text" class="form-control" />
                       </div>
 
-                      <div class="col-md-4 mb-2">
+                      <div class="col-md-4">
                         <label>Grupo</label>
                         <select formControlName="grupo" class="form-select">
                           <option value="">Selecione</option>
@@ -84,52 +97,42 @@
                         </select>
                       </div>
 
-                      <div class="col-md-6 mb-2">
+                      <div class="col-md-6">
                         <label>Email</label>
                         <input formControlName="email" type="email" class="form-control" />
                       </div>
 
-                      <div class="col-md-6 mb-2">
+                      <div class="col-md-6">
                         <label>Apelido</label>
                         <input formControlName="apelido" type="text" class="form-control" />
                       </div>
 
-                      <div class="col-md-6 mb-2">
+                      <div class="col-md-6">
                         <label>Endereço</label>
                         <input formControlName="endereco" type="text" class="form-control" />
                       </div>
 
-                      <div class="col-md-6 mb-2">
+                      <div class="col-md-6">
                         <label>Informações</label>
                         <input formControlName="informacao" type="text" class="form-control" />
                       </div>
 
-                      <div class="col-md-6 mb-2">
+                      <div class="col-md-6">
                         <label>Data de Aniversário</label>
                         <input formControlName="dataAniversario" type="date" class="form-control" />
                       </div>
 
-                      <div class="col-md-6 mb-2">
-                        <label>Grupo</label>
-                        <select formControlName="grupo" class="form-select">
-                          <option value="">Selecione</option>
-                          <option>Família</option>
-                          <option>Trabalho</option>
-                          <option>Escola/Faculdade</option>
-                        </select>
-                      </div>
-
-                      <div class="col-md-12 mb-3">
+                      <div class="col-md-6 d-flex align-items-end">
                         <div class="form-check">
                           <input formControlName="favorito" type="checkbox" class="form-check-input" id="favorito" />
                           <label for="favorito" class="form-check-label">Favorito</label>
                         </div>
                       </div>
 
-                      <div class="col-md-12 d-flex gap-2">
-                        <button type="submit" class="btn btn-success">Salvar</button>
+                      <div class="col-12 d-flex gap-2 mt-2">
+                        <button type="submit" class="btn btn-success">💾 Salvar</button>
                         <button type="button" class="btn btn-secondary" (click)="clear()">Cancelar</button>
-                        <button type="button" class="btn btn-danger ms-auto" (click)="delete(c)">Excluir</button>
+                        <button type="button" class="btn btn-danger ms-auto" (click)="delete(c)">🗑️ Excluir</button>
                       </div>
                     </div>
                   </form>

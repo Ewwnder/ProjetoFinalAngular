@@ -33,6 +33,7 @@ export class GerenciarComponent implements OnInit{
 
     this.filtro = this.formBuilder.group({
       name: [''],
+      busca: ['name'],
       grupo: [''],
       favoritos: [false],
       ordenarAlfabeto: [false]
@@ -49,10 +50,11 @@ export class GerenciarComponent implements OnInit{
 
   loadContatos() {
     const nome = this.filtro.get('name')?.value;
+    const busca = this.filtro.get('busca')?.value;
     const favoritos = this.filtro.get('favoritos')?.value;
     const ordenarAZ = this.filtro.get('ordenarAlfabeto')?.value;
 
-    this.gerenciarContato.filtrarContatos(nome, favoritos, ordenarAZ).subscribe({
+    this.gerenciarContato.filtrarContatos(nome, busca, favoritos, ordenarAZ).subscribe({
       next: json => this.Contato = json
   });
 }
@@ -89,26 +91,13 @@ export class GerenciarComponent implements OnInit{
 
 
   get filtrarContato(): Contato[]{
-    let filtrados = this.Contato;
-
     const grupo = this.filtro.get('grupo')?.value || '';
-    const favoritos = this.filtro.get('favoritos')?.value;
-    const ordenarAlfabeto = this.filtro.get('ordenarAlfabeto')?.value;
 
-    if (grupo) {
-      filtrados = filtrados.filter(c => c.grupo === grupo);
+    if (!grupo) {
+      return this.Contato;
     }
 
-    if (favoritos) {
-      filtrados = filtrados.filter(c => c.favorito);
-    }
-
-    if (ordenarAlfabeto) {
-      filtrados = [...filtrados].sort((a, b) => a.name.localeCompare(b.name));
-    }
-
-    return filtrados;
-
+    return this.Contato.filter(c=>c.grupo === grupo);
   }
 }
 
