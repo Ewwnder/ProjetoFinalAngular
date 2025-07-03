@@ -3,7 +3,11 @@
     <div class="col-12 col-lg-10 m-auto">
       <h1 class="text-center mb-4">Contatos</h1>
 
-      <form [formGroup]="filtro" class="card shadow-sm p-3 mb-4 border border">
+      <div class="text-end mb-3">
+        <button class="btn btn-success" routerLink="/cadastro">Novo Contato</button>
+      </div>
+
+      <form [formGroup]="filtro" class="card shadow-sm p-3 mb-4 border">
         <div class="row g-2 align-items-center">
 
           <div class="col-md-6 col-lg-4">
@@ -45,7 +49,7 @@
       </form>
       
       <div class="table-responsive">
-        <table class="table table-hover table-striped align-middle shadow-sm rounded overflow-hidden">
+        <table class="table table-hover table-striped align-middle shadow-sm rounded">
           <thead class="table-light">
             <tr>
               <th>Id</th>
@@ -74,7 +78,7 @@
 
               <tr *ngIf="isEditing && formGroupContato.get('id')?.value === c.id">
                 <td colspan="5">
-                  <form [formGroup]="formGroupContato" (ngSubmit)="update()">
+                  <form [formGroup]="formGroupContato">
                     <div class="row g-3">
 
                       <div class="col-md-4">
@@ -130,7 +134,7 @@
                       </div>
 
                       <div class="col-12 d-flex gap-2 mt-2">
-                        <button type="submit" class="btn btn-success">💾 Salvar</button>
+                        <button type="submit" class="btn btn-success" (click)="update()">💾 Salvar</button>
                         <button type="button" class="btn btn-secondary" (click)="clear()">Cancelar</button>
                         <button type="button" class="btn btn-danger ms-auto" (click)="delete(c)">🗑️ Excluir</button>
                       </div>

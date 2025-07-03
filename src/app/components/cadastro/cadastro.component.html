@@ -65,7 +65,8 @@
 
         </div>
 
-        <div class="d-grid">
+        <div class="d-flex justify-content-between mt-3">
+          <button type="button" class="btn btn-outline-danger" (click)="clear()">Cancelar</button>
           <button type="button" class="btn btn-success"[disabled]="!formGroupCadastro.get('name')?.valid || !formGroupCadastro.get('number')?.valid" (click)="cadastrar()">Cadastrar Contato
           </button>
         </div>

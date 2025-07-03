@@ -1,23 +1,23 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand ms-3" href="#">Agenda Telefonica</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLink="/home">Início</a>
-        </li>
+  <a class="navbar-brand ms-3" href="#">Agenda Telefônica</a>
 
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLink="/cadastro">Cadastrar Contato</a>
-        </li>
+  <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+          aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-        <li class="nav-item">
-            <a class="nav-link" aria-current="page" routerLink="/gerenciar">Gerenciar Contatos</a>
-        </li>
-       </ul>
-
-    </div>
-  </nav>
+  <div class="collapse navbar-collapse justify-content-lg-end" id="navbarSupportedContent">
+    <ul class="navbar-nav w-100 w-lg-auto d-flex flex-column flex-lg-row align-items-center align-items-lg-start gap-2 py-3 py-lg-0">
+      <li class="nav-item">
+        <a class="nav-link fw-semibold fs-5" routerLink="/home" routerLinkActive="active">Início</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link fw-semibold fs-5" routerLink="/cadastro" routerLinkActive="active">Cadastrar Contato</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link fw-semibold fs-5" routerLink="/gerenciar" routerLinkActive="active">Gerenciar Contatos</a>
+      </li>
+    </ul>
+  </div>
+</nav>

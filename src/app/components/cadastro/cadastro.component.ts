@@ -46,4 +46,8 @@ export class CadastroComponent implements OnInit{
     }
   }
 
+  clear(){
+    this.formGroupCadastro.reset();
+  }
+
 }
