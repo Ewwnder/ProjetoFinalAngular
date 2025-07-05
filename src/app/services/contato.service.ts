@@ -8,7 +8,7 @@ import { Contato } from '../contato';
 })
 export class ContatoService {
 
-  private apiUrl = 'http://localhost:8080/contatos';
+  private apiUrl = "https://projetofinalagendanf.duckdns.org/contatos";
 
   constructor(private http:HttpClient) {}
 
